@@ -1,0 +1,11 @@
+workflow:
+  rules:
+    - if: $CI_PIPELINE_SOURCE == 'merge_request_event'
+
+stages:
+  - prepare
+  - test
+  - build
+
+include:
+  - local: .gitlab/.gitlab-ci-frontend-tests.yml

@@ -1,0 +1,32 @@
+image: node:16.13.2-alpine
+prepare:req:
+  stage: prepare
+  script:
+    - echo "Installing requirements"
+    - yarn install --cache
+
+  artifacts:
+    paths:
+      - node_modules
+  cache:
+    key:
+      files:
+        - yarn.lock
+    paths:
+      - .yarn/
+test:eslint:
+  stage: test
+  script:
+    - echo "Checking eslint..."
+    - yarn eslint
+test:prettier:
+  stage: test
+  script:
+    - echo "Checking code style..."
+    - yarn prettier-check
+
+test:check-types:
+  stage: test
+  script:
+    - echo "Checking types..."
+    - yarn check-types
